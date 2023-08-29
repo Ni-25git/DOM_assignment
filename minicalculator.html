@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini calculator</title>
+</head>
+<body>
+    Enter first no: <input type="text" id ="first" placeholder="Enter your 1st no"><br>
+    Enter second no: <input type="text" id ="second" placeholder="Enter your 2nd no"><br>
+    <button onclick="add()" id="display1">Add</button><br>
+    <button onclick="subtract()" id="display2">Subtract</button><br>
+    <button onclick="divide()" id="display3">Divide</button><br>
+    <button onclick="mul()" id="display4">Multiply</button><br>
+</body>
+</html>
+<script>
+function add(){
+    let x=document.getElementById("first").value;
+    let y=document.getElementById("second").value;
+    let z=document.getElementById("display1");
+    let data=parseInt(x)+parseInt(y);
+    z.innerText=data
+
+}
+
+function subtract(){
+    let x=document.getElementById("first").value;
+    let y=document.getElementById("second").value;
+    let z=document.getElementById("display2");
+    let data=parseInt(x)-parseInt(y);
+    z.innerText=data
+
+}
+
+function divide(){
+    let x=document.getElementById("first").value;
+    let y=document.getElementById("second").value;
+    let z=document.getElementById("display3");
+    let data=parseInt(x)/parseInt(y);
+    z.innerText=data
+
+}
+
+function mul(){
+    let x=document.getElementById("first").value;
+    let y=document.getElementById("second").value;
+    let z=document.getElementById("display4");
+    let data=parseInt(x)*parseInt(y);
+    z.innerText=data
+
+}
+</script>
