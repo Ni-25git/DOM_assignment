@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturing and Displaying Form Data using DOM Manipulation</title>
+</head>
+<body>
+    <h1>Form</h1>
+    <input type="text" id="myInput">
+    <button id="myButton">Submit</button>
+    <p id="output"></p>
+
+    <script>
+
+        var inputField = document.getElementById('myInput');
+        var submitButton = document.getElementById('myButton');
+        var outputParagraph = document.getElementById('output');
+
+        submitButton.addEventListener('click', function () {
+            var enteredValue = inputField.value;
+
+            alert('Entered Value: ' + enteredValue);
+
+            outputParagraph.textContent = 'Entered Value: ' + enteredValue;
+        });
+    </script>
+</body>
+</html>

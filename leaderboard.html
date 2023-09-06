@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #container {
+            margin: 20px;
+        }
+        #score {
+            font-size: 24px;
+            margin: 10px;
+        }
+        #buttons {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            font-size: 18px;
+            margin: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #min, #max {
+            font-size: 18px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Leaderboard</h1>
+        <div id="score">Enter a score:</div>
+        <div id="buttons">
+            <button onclick="addToScore(1)">1</button>
+            <button onclick="addToScore(2)">2</button>
+            <button onclick="addToScore(3)">3</button>
+            <button onclick="addToScore(4)">4</button>
+            <button onclick="addToScore(5)">5</button>
+            <button onclick="addToScore(6)">6</button>
+            <button onclick="addToScore(7)">7</button>
+            <button onclick="addToScore(8)">8</button>
+            <button onclick="addToScore(9)">9</button>
+            <button onclick="addToScore(0)">0</button>
+        </div>
+        <button id="enterButton" onclick="updateMinMax()">ENTER</button>
+        <div>
+            <div id="min">MIN: <span id="minScore">-</span></div>
+            <div id="max">MAX: <span id="maxScore">-</span></div>
+        </div>
+    </div>
+
+    <script>
+        var currentScore = '';
+        var minScore = null;
+        var maxScore = null;
+
+        function addToScore(number) {
+            currentScore += number;
+            document.getElementById('score').textContent = 'Enter a score: ' + currentScore;
+        }
+
+        function updateMinMax() {
+            var score = parseInt(currentScore);
+
+            if (isNaN(score)) {
+                alert('Please enter a valid score.');
+                return;
+            }
+
+            if (minScore === null || score < minScore) {
+                minScore = score;
+                document.getElementById('minScore').textContent = minScore;
+            }
+
+            if (maxScore === null || score > maxScore) {
+                maxScore = score;
+                document.getElementById('maxScore').textContent = maxScore;
+            }
+
+            currentScore = '';
+            document.getElementById('score').textContent = 'Enter a score: ';
+        }
+    </script>
+</body>
+</html>
