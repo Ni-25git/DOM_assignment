@@ -3,119 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <title>Calculator</title>
     <style>
-        body{
-            font-family: Poppins;
-        }
-        #head{
+        body {
+            font-family: Arial, sans-serif;
             text-align: center;
-            font-size: 40px;
-            color: #3393FF;
-            margin-top: 20px;
         }
-        #parent{
-            height: 500px;
-            width: 25%;
-            margin: auto;
-            margin-top: 40px;
-            background-color: #F8F9F9;
+        #calculator {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px #ccc;
         }
-        #name{
-            height: 60px;
-            width: 75%;
-            margin: auto;
-            margin-top: 60px;
-            border: 1px solid black;
-            margin-left: 35px;
+        input[type="text"] {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 18px;
         }
-        #container{
-            height: 350px;
-            width: 75%;
-            margin: auto;
-            margin-top: 60px;
-            display: grid;
-            grid-template-columns: repeat(4,60px);
-            grid-template-rows: repeat(4,75px);
-            gap: 15px;
+        button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
         }
-        #container>div{
-            text-align: center;
-            margin-top: 10px;
-            font-size: 30px;
-            background-color: 	#FAF9F6;
-        }
-        #container>div:nth-child(13){
-            background-color: red;
-            color: #F8F9F9;
-        }
-        #container>div:nth-child(4n+0){
-            background-color: black;
-            color: #F8F9F9;
-        }
-        #container>div:nth-child(15){
-            background-color: black;
-            color: #F8F9F9;
-        }
-
     </style>
 </head>
 <body>
-    <div id="head">Masai Calculator</div>
-    <div id="parent">
-        <input type="text" name="name" id="name">
-        <div id="container">
-            <button class="keypad">1</button>
-            <button class="keypad">2</button>
-            <button class="keypad">3</button>
-            <button class="operator">+</button>
-            <button class="keypad">4</button>
-            <button class="keypad">5</button>
-            <button class="keypad">6</button>
-            <button class="operator">-</button>
-            <button class="keypad">7</button>
-            <button class="keypad">8</button>
-            <button class="keypad">9</button>
-            <button class="operator">*</button>
-            <button>C</button>
-            <button class="keypad">0</button>
-            <button id="equal">=</button>
-            <button class="operator">/</button>
-        </div>
+    <div id="calculator">
+        <input type="text" id="result" disabled>
+        <table>
+            <tr>
+                <td><button onclick="appendToResult('7')">7</button></td>
+                <td><button onclick="appendToResult('8')">8</button></td>
+                <td><button onclick="appendToResult('9')">9</button></td>
+                <td><button onclick="appendToResult('+')">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToResult('4')">4</button></td>
+                <td><button onclick="appendToResult('5')">5</button></td>
+                <td><button onclick="appendToResult('6')">6</button></td>
+                <td><button onclick="appendToResult('-')">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToResult('1')">1</button></td>
+                <td><button onclick="appendToResult('2')">2</button></td>
+                <td><button onclick="appendToResult('3')">3</button></td>
+                <td><button onclick="appendToResult('*')">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToResult('0')">0</button></td>
+                <td><button onclick="clearResult()">C</button></td>
+                <td><button onclick="calculateResult()">=</button></td>
+                <td><button onclick="appendToResult('/')">/</button></td>
+            </tr>
+        </table>
     </div>
+
+    <script>
+        function appendToResult(value) {
+            document.getElementById('result').value += value;
+        }
+
+        function clearResult() {
+            document.getElementById('result').value = '';
+        }
+
+        function calculateResult() {
+            var expression = document.getElementById('result').value;
+            try {
+                var result = eval(expression);
+                document.getElementById('result').value = result;
+            } catch (error) {
+                document.getElementById('result').value = 'Error';
+            }
+        }
+    </script>
 </body>
 </html>
-<script>
-let keypadButton=document.querySelectorAll(".keypad");
-let operatorButton=document.querySelectorAll("operator");
-let equal=document.getElementById("equal");
-let result=document.getElementById("name");
-
-let firstNumber="";
-let secondNumber="";
-let IsfirstNumber=true;
-
-for(let i=0; i<keypadButton.length; i++){
-    keypadButton[i].addEventListener("click",function()
-    {
-        if(IsfirstNumber==true){
-firstNumber += keypadButton[i].innerText;
-result.innerText=firstNumber
-        }
-        else{
-            secondNumber += keypadButton[i].innerText;
-result.innerText=secondNumber
-        }
-    })
-}
-
-for(let i=0; i<operatorButton.length; i++){
-    operatorButton[i].addEventListener("click",function()
-    {
-IsfirstNumber==false;
-operators = operatorButton[i].innerText;
-    })
-}
-
-</script>
