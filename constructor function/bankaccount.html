@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account management</title>
+    <style> 
+        #display{
+            text-align: center;
+            color: red;
+        }
+        #display2{
+            text-align: center;
+            color: black;
+        }         
+    </style>
+</head>
+<body>
+   <h1>Bank Account Management</h1>
+   <div>
+    <h1 id="display"></h1>
+    <h4 id="display2"></h4>
+   </div> 
+</body>
+</html>
+<script>
+function BankAccount(accountNumber,name,type,balance,isActive)
+{
+    this.accountNumber=accountNumber;
+    this.name=name;
+    this.balance=balance;
+    this.isActive=isActive;
+ 
+this.deposit = function(amount){
+    this.balance+=amount;
+    console.log(`Your Updated Balance: ${this.balance}rs`);
+
+    let res=document.getElementById("display");
+
+    let h1=document.createElement("h1");
+    h1.innerText=`Your Updated Balance: ${this.balance}rs`
+    res.appendChild(h1);
+
+}
+
+this.withdrawl=function(amount){
+    if(this.balance>=amount){
+        this.balance -= amount;
+        console.log(`Your Updated Balance: ${this.balance}`);
+    }
+    else{
+    console.log("Insufficient Balance")
+    }
+
+    let res=document.getElementById("display2");
+
+
+}
+
+this.isActive= function(){
+    if(this.balance<0){
+        console.log("Account is Inactive")
+    }
+    else{
+        console.log("Account is Active")
+    }
+}
+}
+let account1 = new BankAccount(7543000,"Nipun","Savings",10000,true);
+account1.deposit(2000)
+account1.isActive()
+</script>

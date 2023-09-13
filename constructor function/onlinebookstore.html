@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        h1 {
+            margin: 0;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .book {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .book h2 {
+            margin-top: 0;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        button {
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Online Bookstore</h1>
+    </header>
+    <main>
+        <section id="bookstore">
+            
+        </section>
+    </main>
+</body>
+</html>
+<script>
+function Author(name, birthYear, nationality) {
+    this.name = name;
+    this.birthYear = birthYear;
+    this.nationality = nationality;
+}
+
+function Book(title, author, genre, price) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.price = price;
+}
+
+Book.prototype.getBookInfo = function () {
+    return `Title: ${this.title}<br>Author: ${this.author.name}<br>Genre: ${this.genre}<br>Price: $${this.price}`;
+};
+
+
+let author1 = new Author("J.K. Rowling", 1965, "British");
+let author2 = new Author("George Orwell", 1903, "British");
+
+
+const book1 = new Book("Harry Potter and the Sorcerer's Stone", author1, "Fantasy", 20.99);
+const book2 = new Book("1984", author2, "Dystopian", 15.99);
+
+
+let bookstore = document.getElementById("bookstore");
+
+function displayBookDetails(book) {
+    let bookDiv = document.createElement("div");
+    bookDiv.classList.add("book");
+    bookDiv.innerHTML = `<h2>${book.title}</h2>${book.getBookInfo()}`;
+    bookstore.appendChild(bookDiv);
+}
+
+displayBookDetails(book1);
+displayBookDetails(book2);
+
+</script>
