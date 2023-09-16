@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automobile Inheritance</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      
+      .automobile-info {
+        border: 2px solid #ccc;
+        padding: 20px;
+        max-width: 400px;
+        margin-bottom: 20px;
+      }
+      
+      h2 {
+        margin-bottom: 10px;
+      }
+      
+      p {
+        margin: 5px 0;
+      }
+      
+      span {
+        font-weight: bold;
+      }
+      
+      
+  </style>
+</head>
+<body>
+    <div class="automobile-info">
+        <h2>Four-Wheeler Information using Object.create()</h2>
+        <p>Fuel Type: <span id="fuel-type-object-create"></span></p>
+        <p>Model: <span id="model-object-create"></span></p>
+        <p>Number of Seats: <span id="num-seats-object-create"></span></p>
+      </div>
+    
+      <div class="automobile-info">
+        <h2>Four-Wheeler Information using Constructor Function</h2>
+        <p>Fuel Type: <span id="fuel-type-constructor"></span></p>
+        <p>Model: <span id="model-constructor"></span></p>
+        <p>Number of Seats: <span id="num-seats-constructor"></span></p>
+      </div>
+</body>
+</html>
+<script>
+   
+let Automobile = {
+    fuelType: 'Petrol',
+    engineCapacity: '2.0L',
+    wheels: 4,
+  
+    startEngine() {
+      return 'Engine started';
+    },
+  
+    stopEngine() {
+      return 'Engine stopped';
+    }
+  }
+  
+  
+  const FourWheelerObjectCreate = Object.create(Automobile);
+  
+  
+  FourWheelerObjectCreate.model = 'SUV';
+  FourWheelerObjectCreate.numSeats = 5;
+  
+  
+  FourWheelerObjectCreate.fuelType = 'Diesel';
+  
+  
+  function FourWheelerConstructor() {
+    
+  
+    this.fuel='petrol';
+    this.model = 'Sedan';
+    this.numSeats = 4;
+  }
+
+document.getElementById('fuel-type-object-create').innerText = FourWheelerObjectCreate.fuelType;
+document.getElementById('model-object-create').innerText = FourWheelerObjectCreate.model;
+document.getElementById('num-seats-object-create').innerText = FourWheelerObjectCreate.numSeats;
+
+const fourWheelerConstructorInstance = new FourWheelerConstructor();
+
+document.getElementById('fuel-type-constructor').innerText = fourWheelerConstructorInstance.fuelType;
+document.getElementById('model-constructor').innerText = fourWheelerConstructorInstance.model;
+document.getElementById('num-seats-constructor').innerText = fourWheelerConstructorInstance.numSeats;
+  
+</script>
