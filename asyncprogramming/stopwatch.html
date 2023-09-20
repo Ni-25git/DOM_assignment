@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch</title>
+  <style>
+    /* Add your CSS styles here */
+    #display {
+      font-size: 2em;
+      text-align: center;
+    }
+    #controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="display">00:00:00</div>
+  <div id="controls">
+    <button onclick="startStopwatch()">Start</button>
+    <button onclick="pauseStopwatch()">Pause</button>
+    <button onclick="resetStopwatch()">Reset</button>
+  </div>
+
+  <script>
+    let startTime;
+    let elapsedTime = 0;
+    let timerInterval;
+    let isRunning = false;
+
+    function formatTime(ms) {
+      const date = new Date(ms);
+      return date.toISOString().substr(11, 8);
+    }
+
+    function updateDisplay() {
+      const display = document.getElementById('display');
+      const formattedTime = formatTime(elapsedTime);
+      display.textContent = formattedTime;
+    }
+
+    function startStopwatch() {
+      if (!isRunning) {
+        startTime = Date.now() - elapsedTime;
+        timerInterval = setInterval(function() {
+          elapsedTime = Date.now() - startTime;
+          updateDisplay();
+        }, 1000);
+        isRunning = true;
+      }
+    }
+
+    function pauseStopwatch() {
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+      }
+    }
+
+    function resetStopwatch() {
+      elapsedTime = 0;
+      updateDisplay();
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+      }
+    }
+  </script>
+</body>
+</html>

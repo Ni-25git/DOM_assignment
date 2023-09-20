@@ -38,7 +38,7 @@
 </body>
 </html>
 <script>
-    // Vehicle constructor function
+
 function Vehicle(brand, model, speed, fuelType) {
     this.brand = brand;
     this.model = model;
@@ -46,7 +46,7 @@ function Vehicle(brand, model, speed, fuelType) {
     this.fuelType = fuelType;
   }
   
-  // Common methods using prototype
+
   Vehicle.prototype.accelerate = function (increase) {
     this.speed += increase;
   };
@@ -59,68 +59,61 @@ function Vehicle(brand, model, speed, fuelType) {
     console.log(`${this.brand} ${this.model} is refueling.`);
   };
   
-  // Car constructor function
   function Car(brand, model, speed, fuelType, numberOfWheels) {
-    // Inherit properties from Vehicle
+
     Vehicle.call(this, brand, model, speed, fuelType);
     this.numberOfWheels = numberOfWheels || 4;
   }
   
-  // Inherit methods from Vehicle
+  
   Car.prototype = Object.create(Vehicle.prototype);
   Car.prototype.constructor = Car;
   
-  // Additional method for Car
+  
   Car.prototype.honk = function () {
     console.log(`${this.brand} ${this.model} is honking.`);
   };
   
-  // Airplane constructor function
+  
   function Airplane(brand, model, speed, fuelType, numberOfEngines, hasLandingGear) {
-    // Inherit properties from Vehicle
+
     Vehicle.call(this, brand, model, speed, fuelType);
     this.numberOfEngines = numberOfEngines || 2;
     this.hasLandingGear = hasLandingGear || true;
   }
   
-  // Inherit methods from Vehicle
   Airplane.prototype = Object.create(Vehicle.prototype);
   Airplane.prototype.constructor = Airplane;
   
-  // Additional method for Airplane
   Airplane.prototype.takeOff = function () {
     console.log(`${this.brand} ${this.model} is taking off.`);
   };
 
-  // Function to demonstrate accelerating the car
+
 function accelerateCar() {
-    const car = new Car('Toyota', 'Camry', 60, 'Petrol', 4);
+    let car = new Car('Toyota', 'Camry', 60, 'Petrol', 4);
     car.accelerate(20);
     console.log('Current speed of the car:', car.speed);
   }
   
-  // Function to demonstrate braking the car
   function brakeCar() {
-    const car = new Car('Toyota', 'Corolla', 50, 'Petrol', 4);
+    let car = new Car('Toyota', 'Corolla', 50, 'Petrol', 4);
     car.brake(10);
     console.log('Current speed of the car:', car.speed);
   }
   
-  // Function to demonstrate refueling the car
   function refuelCar() {
-    const car = new Car('Honda', 'Civic', 0, 'Diesel', 4);
+    let car = new Car('Honda', 'Civic', 0, 'Diesel', 4);
     car.refuel();
   }
   
-  // Function to demonstrate honking the car
   function honkCar() {
-    const car = new Car('Ford', 'Mustang', 0, 'Petrol', 4);
+    let car = new Car('Ford', 'Mustang', 0, 'Petrol', 4);
     car.honk();
   }
   
-  // Function to demonstrate taking off in an airplane
   function takeOffAirplane() {
-    const airplane = new Airplane('Boeing', '747', 0, 'Jet Fuel', 4, true);
+    let airplane = new Airplane('Boeing', '747', 0, 'Jet Fuel', 4, true);
     airplane.takeOff();
   }
   

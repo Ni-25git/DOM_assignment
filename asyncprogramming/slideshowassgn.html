@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slideshow</title>
+  <style>
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+    }
+
+    .mySlides {
+      display: none;
+    }
+
+    .slide-img {
+      width: 100%;
+      height: auto;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .prev {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+
+    .start-stop {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .start-stop:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow-container">
+    <div class="mySlides">
+      <img class="slide-img" src="https://images.pexels.com/photos/6590699/pexels-photo-6590699.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 1">
+    </div>
+    <div class="mySlides">
+      <img class="slide-img" src="https://images.pexels.com/photos/3621344/pexels-photo-3621344.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=699.825&fit=crop&h=1133.05" alt="Slide 2">
+    </div>
+    <div class="mySlides">
+      <img class="slide-img" src="https://images.pexels.com/photos/16059681/pexels-photo-16059681/free-photo-of-clouds-over-mountains.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 3">
+    </div>
+    <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/16948299/pexels-photo-16948299/free-photo-of-close-up-of-pink-flowers.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 4">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/17038848/pexels-photo-17038848/free-photo-of-river-flowing-in-green-valley.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 5">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 6">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 7">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 8">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/4962458/pexels-photo-4962458.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 9">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/3472690/pexels-photo-3472690.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 10">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/1486974/pexels-photo-1486974.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 11">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 12">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 13">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/91216/pexels-photo-91216.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 14">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/2605867/pexels-photo-2605867.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 15">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/3750779/pexels-photo-3750779.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 16">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/3052361/pexels-photo-3052361.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 17">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/2422265/pexels-photo-2422265.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 18">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/1154610/pexels-photo-1154610.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 19">
+      </div>
+      <div class="mySlides">
+        <img class="slide-img" src="https://images.pexels.com/photos/2849133/pexels-photo-2849133.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Slide 20">
+      </div>
+
+    <button class="prev" onclick="plusSlides(-1)">❮</button>
+    <button class="next" onclick="plusSlides(1)">❯</button>
+    <button class="start-stop" onclick="startStop()">Start/Stop</button>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+    let slideshowInterval;
+    let isSlideshowRunning = false;
+
+    function showSlides() {
+      let slides = document.getElementsByClassName("mySlides");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+      slides[slideIndex - 1].style.display = "block";
+    }
+
+    function plusSlides(n) {
+      clearInterval(slideshowInterval);
+      isSlideshowRunning = false;
+      slideIndex += n;
+      showSlides();
+    }
+
+    function startStop() {
+      let startStopButton = document.querySelector(".start-stop");
+      if (isSlideshowRunning) {
+        clearInterval(slideshowInterval);
+        startStopButton.textContent = "Start";
+      } else {
+        showSlides();
+        slideshowInterval = setInterval(showSlides, 2000);  
+        startStopButton.textContent = "Stop";
+      }
+      isSlideshowRunning = !isSlideshowRunning;
+    }
+  </script>
+</body>
+</html>

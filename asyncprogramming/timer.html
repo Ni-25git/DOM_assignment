@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer</title>
+  <style>
+    #controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <label for="hours">Hours:</label>
+    <input type="number" id="hours" min="0" value="0">
+    <label for="minutes">Minutes:</label>
+    <input type="number" id="minutes" min="0" max="59" value="0">
+    <label for="seconds">Seconds:</label>
+    <input type="number" id="seconds" min="0" max="59" value="10">
+  </div>
+
+  <div id="display">00:00:00</div>
+  <div id="controls">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
+
+  <script>
+    let timerInterval;
+    let isRunning = false;
+    let totalSeconds = 0;
+
+    function updateDisplay() {
+      let display = document.getElementById('display');
+      let hours = Math.floor(totalSeconds / 3600);
+      let minutes = Math.floor((totalSeconds % 3600) / 60);
+      let seconds = totalSeconds % 60;
+
+      let formattedTime = 
+        (hours < 10 ? '0' : '') + hours + ':' +
+        (minutes < 10 ? '0' : '') + minutes + ':' +
+        (seconds < 10 ? '0' : '') + seconds;
+
+      display.textContent = formattedTime;
+    }
+
+    function startTimer() {
+      if (!isRunning) {
+        let hours = parseInt(document.getElementById('hours').value, 10) || 0;
+        let minutes = parseInt(document.getElementById('minutes').value, 10) || 0;
+        let seconds = parseInt(document.getElementById('seconds').value, 10) || 0;
+
+        totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+        timerInterval = setInterval(function() {
+          if (totalSeconds > 0) {
+            totalSeconds--;
+            updateDisplay();
+          } else {
+            clearInterval(timerInterval);
+            isRunning = false;
+          }
+        }, 1000);
+        isRunning = true;
+      }
+    }
+
+    function pauseTimer() {
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isRunning = false;
+      totalSeconds = 0;
+      updateDisplay();
+    }
+  </script>
+</body>
+</html>
