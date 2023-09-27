@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      button {
+        padding: 10px 20px;
+        margin-bottom: 20px;
+      }
+      
+      .user-data {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .user-card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 10px;
+        width: 200px;
+        text-align: center;
+      }
+      
+      .user-card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+      
+      .user-card p {
+        margin: 0;
+      }
+      
+  </style>
+  <title>Fetch Users</title>
+</head>
+<body>
+  <div class="container">
+    <h1>User Information</h1>
+    <button id="fetchUsers">Fetch Users</button>
+
+    <div id="userData" class="user-data">
+      <!-- User data will be displayed here -->
+    </div>
+  </div>
+
+  <script src="./userdata.js"></script>
+</body>
+</html>
