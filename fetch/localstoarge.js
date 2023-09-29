@@ -1,26 +1,24 @@
-const form = document.getElementById('userInfoForm');
-const displayDataButton = document.getElementById('retrieveData');
-const displayDataDiv = document.getElementById('displayData');
-const userDataBody = document.getElementById('userDataBody');
+let form = document.getElementById('userInfoForm');
+let displayDataButton = document.getElementById('retrieveData');
+let displayDataDiv = document.getElementById('displayData');
+let userDataBody = document.getElementById('userDataBody');
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
-  const name = document.getElementById('name').value;
-  const age = document.getElementById('age').value;
+  let name = document.getElementById('name').value;
+  let age = document.getElementById('age').value;
 
-  // Store data in local storage
-  const userData = { name, age };
+  let userData = { name, age };
   localStorage.setItem('userData', JSON.stringify(userData));
 
-  // Clear the form
   form.reset();
 });
 
 displayDataButton.addEventListener('click', function() {
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  let userData = JSON.parse(localStorage.getItem('userData'));
 
   if (userData) {
-    const newRow = document.createElement('tr');
+    let newRow = document.createElement('tr');
     newRow.innerHTML = `<td>${userData.name}</td><td>${userData.age}</td>`;
     userDataBody.innerHTML = '';
     userDataBody.appendChild(newRow);
