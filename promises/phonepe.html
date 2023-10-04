@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      
+      .container {
+        text-align: center;
+      }
+      
+      button {
+        padding: 15px 30px;
+        font-size: 18px;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+      .processingText {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: auto;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .resultText {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
+      #successMessage {
+        color: green;
+      }
+      
+      #failureMessage {
+        color: red;
+      }
+      
+      
+  </style>
+  <title>PhonePe Payment</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="styles.css">
+      <title>PhonePe Payment</title>
+    </head>
+    <body>
+      <div class="container">
+        <button id="payButton">Make Payment</button>
+        <div id="processingUI" class="hidden">
+          <div class="processingText">Processing payment...</div>
+          <div class="loader"></div>
+        </div>
+        <div id="resultUI" class="hidden">
+          <div id="successMessage" class="hidden">
+            <span class="resultText">Payment Successful!</span>
+          </div>
+          <div id="failureMessage" class="hidden">
+            <span class="resultText">Payment Failed</span>
+          </div>
+        </div>
+      </div>
+    
+      <script src="script.js"></script>
+    </body>
+    </html>
+    
+
+  <script>
+    const paymentButton = document.getElementById('payButton');
+const processingUI = document.getElementById('processingUI');
+const successMessage = document.getElementById('successMessage');
+const failureMessage = document.getElementById('failureMessage');
+const resultUI = document.getElementById('resultUI');
+
+paymentButton.addEventListener('click', () => {
+  showProcessingUI();
+
+  // Simulate payment processing using a promise
+  simulatePayment()
+    .then(() => {
+      showSuccessUI();
+    })
+    .catch(() => {
+      showFailureUI();
+    });
+});
+
+function simulatePayment() {
+  return new Promise((resolve, reject) => {
+    const randomSuccess = Math.random() < 0.5; // Simulate success or failure randomly
+
+    setTimeout(() => {
+      if (randomSuccess) {
+        resolve();
+      } else {
+        reject();
+      }
+    }, 2000); // Simulate a 2-second payment process
+  });
+}
+
+function showProcessingUI() {
+  resultUI.classList.add('hidden');
+  processingUI.classList.remove('hidden');
+}
+
+function showSuccessUI() {
+  processingUI.classList.add('hidden');
+  successMessage.classList.remove('hidden');
+  resultUI.classList.remove('hidden');
+}
+
+function showFailureUI() {
+  processingUI.classList.add('hidden');
+  failureMessage.classList.remove('hidden');
+  resultUI.classList.remove('hidden');
+}
+
+  </script>
+</body>
+</html>

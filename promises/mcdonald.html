@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      
+      #foodOptions {
+        margin-top: 20px;
+      }
+      
+      #foodOptions label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      
+      #orderStatus {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+      
+      #foodImage {
+        width: 200px;
+        height: 200px;
+        background-color: lightgray;
+        margin-top: 20px;
+      }
+      
+      #orderNumber {
+        margin-top: 10px;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+  </style>
+  <title>McDonald's Virtual Food Ordering</title>
+</head>
+<body>
+  <button id="orderButton" onclick="orderFood()">Order Food</button>
+
+  <div id="foodOptions">
+    <label><input type="checkbox" value="Burger">Burger</label>
+    <label><input type="checkbox" value="Fries">Fries</label>
+    <label><input type="checkbox" value="Soda">Soda</label>
+  </div>
+
+  <div id="orderStatus" class="hidden">
+    <p id="orderText">Your order is being prepared. Please wait...</p>
+    <div id="foodImage"></div>
+    <div id="orderNumber">Order ID: <span id="orderID"></span></div>
+  </div>
+
+  <script>
+    let orderIDCounter = 1;
+
+function orderFood() {
+  const selectedFood = [];
+  const checkboxes = document.querySelectorAll('#foodOptions input[type="checkbox"]:checked');
+
+  checkboxes.forEach(checkbox => {
+    selectedFood.push(checkbox.value);
+  });
+
+  if (selectedFood.length === 0) {
+    alert('Please select at least one food item.');
+    return;
+  }
+
+  const orderPromise = new Promise((resolve) => {
+    const randomSeconds = Math.floor(Math.random() * 5) + 1;
+
+    setTimeout(() => {
+      resolve();
+    }, randomSeconds * 1000);
+  });
+
+  orderPromise.then(() => {
+    const orderText = document.getElementById('orderText');
+    orderText.innerText = 'Your order is ready for pickup! Enjoy your meal.';
+
+    const foodImage = document.getElementById('foodImage');
+    foodImage.style.backgroundImage = 'url("path_to_food_image.jpg")';
+    
+    const orderID = document.getElementById('orderID');
+    orderID.innerText = orderIDCounter;
+    orderIDCounter++;
+
+    const orderStatus = document.getElementById('orderStatus');
+    orderStatus.classList.remove('hidden');
+  });
+}
+
+  </script>
+</body>
+</html>

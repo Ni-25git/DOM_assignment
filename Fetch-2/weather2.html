@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Your CSS styles here */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            border: solid 3px black;
+            border-radius: 15px;
+            background-color: aquamarine;
+        }
+        img {
+            height: 100px;
+            width: 150px;
+        }
+        h1 {
+            color: red;
+            margin-top: 30px;
+        }
+        input[type="text"] {
+            margin-top: 30px;
+            height: 30px;
+            width: 400px;
+        }
+        button {
+            height: 35.2px;
+            width: 70px;
+            margin-left: -70px;
+            background-color: beige;
+        }
+        #right input[type="text"] {
+            margin-left: -50px;
+        }
+        #left{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        p{
+            font-size: 20px;
+            color: grey;
+        }
+        span{
+            color: black;
+        }
+        #googleMap{
+            margin-right: 250px;
+            text-align: center;
+            height: 500px;
+            width: 500px;
+        }
+        #forecastDays{
+            display: flex;
+            justify-content: space-between;
+            border: 3px solid black;
+            background-color:  aquamarine;
+            border-radius: 15px;
+        }
+        #h2{
+            color: red;
+            text-align: center;
+        }
+        .forecast-date{
+            font-size: large;
+            color: black;
+            margin-left: 30px;
+        }
+        .forecast-temp{
+            font-size: large;
+            margin-left: 30px;
+            color: black;
+        }
+    </style>
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <div><img src="https://cdn.jim-nielsen.com/ios/512/weather-2021-12-07.png" alt=""></div>
+        <div><h1>Weather App</h1></div>
+        <div id="right"><input type="text" id="cityInput" placeholder="Enter city name"><button onclick="fetchWeather()">Search</button></div>
+    </div>
+    <div id="left">
+        <div id="weatherDetails">
+            <img id="weatherIcon" src="" alt="Weather Icon">
+            <p>Min Temp: <span id="minTemp"></span></p>
+            <p>Max Temp: <span id="maxTemp"></span></p>
+            <p>Wind: <span id="wind"></span></p>
+            <p>Clouds: <span id="clouds"></span></p>
+            <p>Sunrise: <span id="sunrise"></span></p>
+            <p>Sunset: <span id="sunset"></span></p>
+        </div>
+        <div class="map">
+            <iframe id="googleMap" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+      <!-- Weather II -->
+      <div class="forecast-container">
+        <h1 id="h2">5 Day Forecast</h1>
+        <div class="forecast-days" id="forecastDays">
+            <!-- Individual day forecast will be added here using JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        async function fetchWeather() {
+            try {
+              let APIkey = "aa2338a405271c2dbb7943eb7c748def";
+              let city = document.getElementById("cityInput").value;
+          
+              let res = await fetch(
+                `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIkey}`
+              );
+              let data = await res.json();
+          
+              console.log(data);
+          
+              // Weather data
+              let iconId = data.weather[0].icon;
+              let iconUrl = `http://openweathermap.org/img/wn/${iconId}.png`;
+              document.getElementById("weatherIcon").src = iconUrl;
+              document.getElementById("minTemp").innerText = data.main.temp_min;
+              document.getElementById("maxTemp").innerText = data.main.temp_max;
+              document.getElementById("wind").innerText = data.wind.speed;
+              document.getElementById("clouds").innerText = data.clouds.all;
+              document.getElementById("sunrise").innerText = new Date(
+                data.sys.sunrise * 1000
+              ).toLocaleTimeString();
+              document.getElementById("sunset").innerText = new Date(
+                data.sys.sunset * 1000
+              ).toLocaleTimeString();
+          
+              // Update the Google map iframe src
+              const googleMapUrl = `https://www.openstreetmap.org/export/embed.html?layer=mapnik&marker=${data.coord.lat},${data.coord.lon}`;
+              document.getElementById("googleMap").src = googleMapUrl;
+          
+              getForecastData(city);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          
+           async function getForecastData(city) {
+          try {
+              let APIkey = "aa2338a405271c2dbb7943eb7c748def";
+             let res = await fetch(
+                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}&units=metric`
+              );
+               let data = await res.json();
+               console.log(data);
+              const forecastEls = document.getElementById("forecastDays");
+               forecastEls.innerHTML = ""; // Clear existing forecasts
+          
+               // Filter the data to get one forecast per day
+               const dailyData = data.list.filter((item, index) => index % 8 === 0);
+          
+               dailyData.forEach((day, idx) => {
+                if (idx < 5) {
+                  // Only take 5 days
+                  const temp = day.main.temp;
+              const icon = day.weather[0].icon;
+                  const date = new Date(day.dt_txt).toLocaleDateString();
+          
+                   forecastEls.innerHTML += `
+                                      <div class="forecast-day">
+                                  <div class="forecast-date">${date}</div>
+                                  <div class="forecast-icon">
+                                     <img src="http://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+                                  </div>
+                                 <div class="forecast-temp">${temp}°C</div>
+                              </div>
+                          `;
+                }
+              });
+             } catch (error) {
+              console.log(error);
+            }
+          }    
+    </script>
+</body>
+</html>
+
