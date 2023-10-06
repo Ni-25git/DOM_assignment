@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Array</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    
+    #output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    
+    #output p {
+      margin: 0;
+      padding: 5px 0;
+    }
+    
+    #output p:first-child {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="output">
+    <p>Array: <span id="arrayOutput"></span></p>
+    <p>Top element: <span id="topOutput"></span></p>
+    <p>Array in reverse: <span id="reverseOutput"></span></p>
+    <p>Size: <span id="sizeOutput"></span></p>
+    <p>Array after pop: <span id="popOutput"></span></p>
+  </div>
+
+  <script>
+    function CustomArray() {
+        this.size = arguments.length;
+      
+        for (let i = 0; i < arguments.length; i++) {
+          this[i] = arguments[i];
+        }
+      }
+      
+      CustomArray.prototype = {
+        push: function(element) {
+          this[this.size] = element;
+          this.size++;
+        },
+      
+        pop: function() {
+          if (this.size === 0) {
+            console.log('Array is empty. Cannot pop.');
+            return;
+          }
+      
+          const poppedElement = this[this.size - 1];
+          delete this[this.size - 1];
+          this.size--;
+      
+          return poppedElement;
+        },
+      
+        top: function() {
+          if (this.size === 0) {
+            console.log('Array is empty.');
+            return;
+          }
+      
+          return this[this.size - 1];
+        },
+      
+        print: function() {
+          const elements = [];
+          for (let i = 0; i < this.size; i++) {
+            elements.push(this[i]);
+          }
+          return `[${elements.join(',')}]`;
+        },
+      
+        printReverse: function() {
+          const elements = [];
+          for (let i = this.size - 1; i >= 0; i--) {
+            elements.push(this[i]);
+          }
+          return `[${elements.join(',')}]`;
+        }
+      };
+      
+      // Example usage
+      const customArray = new CustomArray(1, 2, 3, 4,5);
+      customArray.push(10);
+      
+      // Update the output in the HTML
+      document.getElementById('arrayOutput').innerText = customArray.print();
+      document.getElementById('topOutput').innerText = customArray.top();
+      document.getElementById('reverseOutput').innerText = customArray.printReverse();
+      document.getElementById('sizeOutput').innerText = customArray.size;
+      
+      customArray.pop();
+      document.getElementById('popOutput').innerText = customArray.print();
+  </script>
+</body>
+</html>
