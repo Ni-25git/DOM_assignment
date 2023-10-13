@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <style>
+        #searchDiv{
+            display: flex;
+            justify-content: space-between;
+            height: 100px;
+            width: 100%;
+            background-color: black;
+            border-radius: 30px;
+        }
+        input[type="text"]{
+            margin-top: 20px;
+            margin-right: 50px;
+            height: 40px;
+            width: 500px;
+            border: solid 2px black;
+            border-radius: 15px;
+            background-color: antiquewhite;
+        }
+        img{
+            height: 80px;
+            width: 200px;
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+          }
+          
+          #movieList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        #root{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            
+        }
+        .product-card {
+           border: 1px solid black;
+           margin: 30px;
+           padding: 20px;
+        }
+   .product-card img{
+    height: 200px;
+    width: 230px;
+   }
+   div1{
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black ;
+   }
+    </style>
+</head>
+<body>
+    <div id="searchDiv">
+        <img src="https://old.officialpsds.com/thumbs/movies-logo-psd51861.png" alt="">
+        <input type="text" id="search" placeholder="Enter your movie name">
+    </div>
+    <div id="movieList">
+
+    </div>
+    <script>
+        
+        let root=document.getElementById("movieList")
+    let SearchBox=document.getElementById("search")
+    async function fetchApi(url){
+        try{
+       let res=await fetch(url)
+       let data=await res.json()
+        let movie=data.Search
+        display(movie)
+    
+        }
+        catch (error){
+            console.log("this is error",error)
+        }
+    
+    }
+    
+      
+    
+    
+    let timer= null;
+      SearchBox.addEventListener("input", function(){
+       clearTimeout(timer)
+       timer=setTimeout(()=>{
+    
+        fetchApi(`http://www.omdbapi.com/?apikey=1f793426&s=${SearchBox.value}`)
+       },500)
+      }) 
+    
+      function display(data) {
+        root.innerHTML = '';
+    
+        data.forEach(function (ele) {
+            let div1 = document.createElement("div");
+            div1.className = "product-card";
+            let img = document.createElement("img");
+            img.src = ele.Poster;
+            let title1 = document.createElement("p");
+            title1.textContent = `Movie Title : ${ele.Title}`;
+            let year = document.createElement("p");
+            year.textContent = `Movie Year : ${ele.Year}`;
+            let imb = document.createElement("p");
+            imb.textContent = `movie.imdbID : ${ele.imdbID}`
+            div1.append(img, title1, year, imb);
+    
+            root.appendChild(div1);
+        });
+    }
+        
+
+    </script>
+</body>
+</html>

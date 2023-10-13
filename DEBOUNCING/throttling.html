@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+    <style>
+        #searchDiv{
+            display: flex;
+            justify-content: space-between;
+            height: 100px;
+            width: 100%;
+            background-color: black;
+            border-radius: 30px;
+        }
+        input[type="text"]{
+            margin-top: 20px;
+            margin-right: 50px;
+            height: 40px;
+            width: 500px;
+            border: solid 2px black;
+            border-radius: 15px;
+            background-color: antiquewhite;
+        }
+        img{
+            height: 80px;
+            width: 200px;
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+          }
+          
+          .receipeList {
+            display: flex;
+            justify-content: space-between;
+            
+          }
+          
+          .recipe {
+            border: 3px solid #ccc;
+            padding: 10px;
+            margin: 5px;
+            width: 300px;
+            text-align: center;
+            margin-top: 50px;
+            height: 300px;
+            margin-left: 50px;
+            border-radius: 10px;
+            background-color: #592720;
+          }
+        .recipe img {
+            margin-left: 12px;
+            height: 250px;
+            width: auto;
+        }
+        p{
+            color: aliceblue;
+        }
+            
+    </style>
+</head>
+<body>
+    <div id="searchDiv">
+        <img src="https://clipground.com/images/restaurant-logo-png-4.png" alt="">
+        <input type="text" id="search" placeholder="Enter your receipe name">
+    </div>
+    <div id="receipeList">
+
+    </div>
+    <script>
+            const API_KEY = 'www.themealdb.com/api/json/v1/1/search.php?f=a'; // Replace with your actual TheMealDB API key
+            const MEALDB_URL = 'https://www.themealdb.com/api/json/v1/1/search.php';
+        
+            const searchInput = document.getElementById('search');
+            const recipeResults = document.getElementById('receipeList');
+            let timeoutId;
+        
+            async function searchRecipes() {
+                const searchTerm = searchInput.value;
+        
+                if (searchTerm.length < 3) {
+                    recipeResults.innerHTML = '';
+                    return;
+                }
+        
+                try {
+                    const response = await fetch(`${MEALDB_URL}?s=${searchTerm}`);
+                    const data = await response.json();
+        
+                    if (data.meals) {
+                        recipeResults.innerHTML = data.meals
+                            .map(meal => `
+                                <div class="recipe">
+                                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                                    <p>${meal.strMeal}</p>
+                                </div>
+                            `)
+                            .join('');
+                    } else {
+                        recipeResults.innerHTML = 'No recipes found.';
+                    }
+                } catch (error) {
+                    console.error('Error fetching recipes:', error);
+                }
+            }
+        
+            searchInput.addEventListener('input', () => {
+                // Clear the previous timeout
+                clearTimeout(timeoutId);
+        
+                // Set a new timeout to call the search function after 300 milliseconds
+                timeoutId = setTimeout(searchRecipes, 300);
+            });
+    
+        
+        
+    </script>
+</body>
+</html>
